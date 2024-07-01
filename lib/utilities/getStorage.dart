@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:get_storage/get_storage.dart';
+import 'package:taxiapplication/Model/Event.dart';
 
-import '../Model/profileModel.dart';
 import 'AppConstants.dart';
 import 'debug.dart';
 
@@ -79,168 +79,39 @@ Future<String> readLanguage() async {
   }
 }
 
-Future<void> storeOnboarding(bool id) async {
+Future<void> storeEvents(List<EventModel> events) async {
   try {
-    await box.write(AppConstants.ONBOARDING, id);
-  } catch (e) {
-    debug(e);
-  }
-}
-
-Future<void> deleteOnboarding() async {
-  try {
-    if (checkHaData(AppConstants.ONBOARDING)) {
-      await box.remove(AppConstants.ONBOARDING);
-    }
-  } catch (e) {
-    debug(e);
-  }
-}
-
-Future<bool> readOnboarding() async {
-  try {
-    if (checkHaData(AppConstants.ONBOARDING)) {
-      return await box.read(AppConstants.ONBOARDING);
-    } else {
-      return false;
-    }
-  } catch (e) {
-    debug(e);
-    return false;
-  }
-}
-
-Future<bool> checkOtpTime() async {
-  try {
-    return box.hasData(AppConstants.START_TIME_KEY);
-  } catch (e) {
-    debug(e);
-    return false;
-  }
-}
-
-Future<void> storeOtpTime(String value) async {
-  try {
-    await box.write(AppConstants.START_TIME_KEY, value);
-  } catch (e) {
-    debug(e);
-  }
-}
-
-Future<void> deleteOtpTime() async {
-  try {
-    if (checkHaData(AppConstants.START_TIME_KEY)) {
-      await box.remove(AppConstants.START_TIME_KEY);
-    }
-  } catch (e) {
-    debug(e);
-  }
-}
-
-Future<String> readOtpTime() async {
-  try {
-    if (checkHaData(AppConstants.START_TIME_KEY)) {
-      return await box.read(AppConstants.START_TIME_KEY);
-    } else {
-      return "";
-    }
-  } catch (e) {
-    debug(e);
-    return "";
-  }
-}
-
-Future<void> storeIsNewUser(bool value) async {
-  try {
-    await box.write(AppConstants.IS_NEW_USER, value);
-  } catch (e) {
-    debug(e);
-  }
-}
-
-Future<void> deleteNewUser() async {
-  try {
-    if (checkHaData(AppConstants.IS_NEW_USER)) {
-      await box.remove(AppConstants.IS_NEW_USER);
-    }
-  } catch (e) {
-    debug(e);
-  }
-}
-
-Future<bool> readNewUser() async {
-  try {
-    if (checkHaData(AppConstants.IS_NEW_USER)) {
-      return await box.read(AppConstants.IS_NEW_USER);
-    } else {
-      return false;
-    }
-  } catch (e) {
-    debug(e);
-    return false;
-  }
-}
-
-Future<bool> readQrCode() async {
-  try {
-    if (checkHaData(AppConstants.QR_CODE)) {
-      return await box.read(AppConstants.QR_CODE);
-    } else {
-      return false;
-    }
-  } catch (e) {
-    debug(e);
-    return false;
-  }
-}
-
-Future<void> storeQrCode(bool qrCode) async {
-  try {
-    await box.write(AppConstants.QR_CODE, qrCode);
-  } catch (e) {
-    debug(e);
-  }
-}
-
-Future<void> deleteQrCode() async {
-  try {
-    if (checkHaData(AppConstants.QR_CODE)) {
-      await box.remove(AppConstants.QR_CODE);
-    }
-  } catch (e) {
-    debug(e);
-  }
-}
-
-Future<void> storeUserData(UserModel user) async {
-  try {
-    final data = jsonEncode(user);
+    final eventsJson = events.map((event) => event.toJson()).toList();
+    final data = jsonEncode(eventsJson);
     await box.write(AppConstants.USER_DATA, data);
   } catch (e) {
-    debug(e);
+    debug(e.toString());
   }
 }
 
-Future<void> deleteUserData() async {
+Future<void> deleteEvent() async {
   try {
-    if (checkHaData(AppConstants.USER_DATA)) {
+    if (box.hasData(AppConstants.USER_DATA)) {
       await box.remove(AppConstants.USER_DATA);
     }
   } catch (e) {
-    debug(e);
+    debug(e.toString());
   }
 }
 
-Future<UserModel> readUserData() async {
+Future<List<EventModel>> readEvents() async {
   try {
-    if (checkHaData(AppConstants.USER_DATA)) {
+    if (box.hasData(AppConstants.USER_DATA)) {
       final userData = await box.read(AppConstants.USER_DATA);
-      return UserModel.fromJson(jsonDecode(userData));
+      final List<dynamic> eventsList = jsonDecode(userData);
+      final List<EventModel> eventModels =
+          eventsList.map((eventJson) => EventModel.fromJson(eventJson)).toList();
+      return eventModels;
     } else {
-      return UserModel();
+      return [];
     }
   } catch (e) {
-    debug(e);
-    return UserModel();
+    debug(e.toString());
+    return [];
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:taxiapplication/utilities/app_size.dart';
 
 import '../../Controller/splashController.dart';
 import '../../utilities/colorconstant.dart';
@@ -21,8 +22,8 @@ class SplashScreenView extends StatelessWidget {
                 child: ScaleTransition(
                     scale: _.animation,
                     child: Image.asset(
-                      Images.taxiLogo_png,
-                      width: 200,
+                      Images.event_png,
+                      width: AppSizes.screenWidth,
                       height: 200,
                     )),
               ),

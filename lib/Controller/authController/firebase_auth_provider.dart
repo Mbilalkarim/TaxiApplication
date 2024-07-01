@@ -17,7 +17,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:taxiapplication/Controller/authController/auth_service.dart';
 
 import '../../Model/responseModel.dart';
-import '../../firebase_options.dart';
 import '../../utilities/colorconstant.dart';
 import '../../utilities/debug.dart';
 import '../../utilities/getStorage.dart';
@@ -41,9 +40,7 @@ class FirebaseAuthProvider implements AuthProvider {
               appId: "1:425903480653:web:f6cc3a9b4af4a15e45a104"),
         );
       } else {
-        await Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform,
-        );
+        await Firebase.initializeApp();
       }
     } catch (e) {
       debug(e);
@@ -82,14 +79,12 @@ class FirebaseAuthProvider implements AuthProvider {
           );
           final UserCredential authResult =
               await FirebaseAuth.instance.signInWithCredential(credential);
-          storeIsNewUser(authResult.additionalUserInfo?.isNewUser ?? false);
         }
         return ResponseModel(true, "Signed in");
       } else {
         final GoogleAuthProvider googleProvider = GoogleAuthProvider();
         final UserCredential authResult =
             await FirebaseAuth.instance.signInWithPopup(googleProvider);
-        storeIsNewUser(authResult.additionalUserInfo?.isNewUser ?? false);
         return ResponseModel(true, "Signed in");
       }
     } catch (error) {
@@ -108,7 +103,6 @@ class FirebaseAuthProvider implements AuthProvider {
       var result = await FirebaseAuth.instance.signInWithCredential(credential);
       var user = currentUser;
       if (user != null) {
-        storeIsNewUser(result.additionalUserInfo?.isNewUser ?? false);
         AuthService.firebase().currentUser;
         return ResponseModel(
           true,
@@ -146,7 +140,6 @@ class FirebaseAuthProvider implements AuthProvider {
           LoginController cont = Get.put(LoginController());
           cont.isLoader = false;
           cont.update();
-          deleteNewUser();
           handleVerificationException(e);
           completer.complete(ResponseModel(false, "Verification Failed $e"));
           throw Exception(e);
@@ -185,8 +178,6 @@ class FirebaseAuthProvider implements AuthProvider {
       UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
       var user = currentUser;
       if (user != null) {
-        storeIsNewUser(userCredential.additionalUserInfo?.isNewUser ?? false);
-
         return ResponseModel(
           true,
           'OTP verification successful',

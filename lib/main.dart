@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:taxiapplication/Views/splashScreen/SplashScreenView.dart';
 import 'package:taxiapplication/utilities/app_size.dart';
 import 'package:taxiapplication/utilities/theme/light_theme.dart';
 
 import 'Controller/settingController.dart';
-import 'Views/splashScreen/SplashScreenView.dart';
 
 Future<void> main() async {
   Get.put(SettingController());
+  // await LocalNotificationService().init();
+
   runApp(const MyApp());
 }
 
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: const [Locale("en"), Locale("de")],
       debugShowCheckedModeBanner: false,
       navigatorKey: Get.key,
-      home: const SplashScreenView(),
+      home: SplashScreenView(),
     );
   }
 }

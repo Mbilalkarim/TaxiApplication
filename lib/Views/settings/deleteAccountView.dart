@@ -144,7 +144,6 @@ class DeleteAccountView extends StatelessWidget {
                                                             .currentUser
                                                             ?.providerId ==
                                                         'phone') {
-                                                      _.deleteAccountOtp(context);
                                                     } else {
                                                       customSnackBar(
                                                           context,

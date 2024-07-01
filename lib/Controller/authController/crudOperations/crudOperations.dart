@@ -8,7 +8,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import '../../../Model/profileModel.dart';
 import '../../../Model/responseModel.dart';
 import '../../../utilities/debug.dart';
-import '../../../utilities/getStorage.dart';
 import '../auth_service.dart';
 import 'firestorage_exception.dart';
 
@@ -120,7 +119,6 @@ class FirestoreServices {
         'isOwnVehicle': user.isOwnVehicle,
         'userType': user.userType,
       });
-      storeUserData(user);
       return ResponseModel(true, 'User data added successfully!');
     } on FirebaseException catch (e) {
       return ResponseModel(true, 'Error Occurred ${e.code.replaceAll("-", " ")}');

@@ -40,35 +40,31 @@ class CustomButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       focusNode: focusNode,
-      child: Row(
-        children: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(radiusValue),
-                color: bgColor,
-                border: Border.all(color: borderColor)),
-            child: Center(
-              child: isLoader
-                  ? SizedBox(
-                      height: 25,
-                      width: 25,
-                      child: CircularProgressIndicator(color: textColor, strokeWidth: 1),
-                    )
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (hasIcon) SvgPicture.asset(icon),
-                        if (hasIcon) Dimensions.PADDING_SIZE_5.spaceX,
-                        Text(
-                          text,
-                          style: style.copyWith(color: textColor),
-                        ),
-                      ],
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(radiusValue),
+            color: bgColor,
+            border: Border.all(color: borderColor)),
+        child: Center(
+          child: isLoader
+              ? SizedBox(
+                  height: 25,
+                  width: 25,
+                  child: CircularProgressIndicator(color: textColor, strokeWidth: 1),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (hasIcon) SvgPicture.asset(icon),
+                    if (hasIcon) Dimensions.PADDING_SIZE_5.spaceX,
+                    Text(
+                      text,
+                      style: style.copyWith(color: textColor),
                     ),
-            ),
-          )
-        ],
+                  ],
+                ),
+        ),
       ),
     );
   }

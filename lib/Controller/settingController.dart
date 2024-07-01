@@ -3,20 +3,19 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../utilities/getStorage.dart';
-import 'authController/auth_service.dart';
 
 class SettingController extends GetxController {
   Locale? appLocale;
   bool isLoader = false;
   var box = GetStorage();
   String? languageCode;
-  AuthService authService = AuthService.firebase();
 
   @override
   Future<void> onInit() async {
     await GetStorage.init();
     languageCode = await readLanguage();
     appLocale = Locale(languageCode!);
+
     super.onInit();
   }
 

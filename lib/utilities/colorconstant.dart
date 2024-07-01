@@ -6,7 +6,7 @@ class AppColors {
   static const kDullBlack = Color.fromRGBO(33, 33, 33, 1);
   static const kPrimaryDark = Color.fromRGBO(227, 61, 148, 1);
 
-  static const kPrimary = Color.fromRGBO(227, 61, 148, 1);
+  static const kPrimary = Color.fromRGBO(38, 202, 202, 1);
   static const kProgress = Color.fromRGBO(207, 47, 116, 1);
   static const kRed = Color.fromRGBO(255, 0, 0, 1);
   static const kGreen = Color.fromRGBO(52, 199, 89, 1);

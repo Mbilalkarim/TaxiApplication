@@ -23,11 +23,7 @@ bool checkEmail(String text) {
 }
 
 void deleteLocalData() {
-  deleteQrCode();
-  deleteUserData();
-  deleteNewUser();
   deleteVerificationId();
-  deleteOtpTime();
 }
 
 void customSnackBar(BuildContext context, Color bgColor, Color textColor, String message) {

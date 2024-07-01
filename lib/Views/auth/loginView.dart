@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:taxiapplication/Views/dashboaard/dashboardView.dart';
 import 'package:taxiapplication/utilities/customWidgets/customHeader.dart';
+import 'package:taxiapplication/utilities/extensions.dart';
 
 import '../../Controller/authController/controller/loginController.dart';
 import '../../utilities/StringConstant.dart';
 import '../../utilities/app_size.dart';
-import '../../utilities/app_utilities.dart';
 import '../../utilities/colorconstant.dart';
 import '../../utilities/customWidgets/customButtom.dart';
 import '../../utilities/customWidgets/customTextfield.dart';
@@ -34,7 +35,7 @@ class LoginView extends StatelessWidget {
                 child: SafeArea(
                   child: Column(
                     children: [
-                      customHeader(_.offsetAnimation, "Taxi App Login"),
+                      customHeader(_.offsetAnimation, "Event App Login"),
                       Expanded(
                         child: Container(
                           padding:
@@ -175,15 +176,7 @@ class LoginView extends StatelessWidget {
                                               children: [
                                                 CustomButton(
                                                     onTap: () {
-                                                      if (_.txtPhoneNumb.text.trim().isNotEmpty) {
-                                                        _.createUserOtp(context);
-                                                      } else {
-                                                        customSnackBar(
-                                                            context,
-                                                            AppColors.kRed,
-                                                            AppColors.kWhite,
-                                                            "Please input number");
-                                                      }
+                                                      Get.myGetTo(DashboardView());
                                                     },
                                                     style: FontSize.txtPop16_800,
                                                     isLoader: _.isLoader,

@@ -5,6 +5,7 @@ class Images {
   static const String backArrow_svg = 'assets/svg/backArrow.svg';
   static const String dropDown_svg = 'assets/svg/dropDown.svg';
   static const String person_png = 'assets/png/person.png';
+  static const String event_png = 'assets/png/event.png';
   static const String health_png = 'assets/png/health.png';
   static const String qrImage_png = 'assets/png/qrImage.png';
   static const String onboard1_png = 'assets/png/onboard1.png';

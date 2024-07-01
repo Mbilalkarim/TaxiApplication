@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
-import 'authController/auth_service.dart';
-
 Future<void> mainInit() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await AuthService.firebase().initialize();
-  AuthService.firebase().logout();
+  // await AuthService.firebase().initialize();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+
+  // Initialize native android notification
 }
